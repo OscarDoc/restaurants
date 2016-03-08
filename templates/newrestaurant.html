@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	{% with title = "Add restaurant" %}
+		{% include "partials/head.html" %}
+	{% endwith %}
+
+	<body>
+		{% include "partials/navigation.html" %}
+
+		<div class="container">
+			<h1>New Restaurant</h1>
+			<form class="" action="{{ url_for('new_restaurant')}}" method="POST">
+				<div class="form-group">
+					<label class="sr-only" for="newRestaurant-inputName">Name</label>
+					<div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-8">
+						<div class="input-group-addon">Name</div>
+						<input required type="text" class="form-control" placeholder="Name" size="30" name="name" id="newRestaurant-inputName">
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Create</button>
+				<a href="{{url_for('show_restaurants')}}" class="btn btn-default">Cancel</a>
+
+			</form>
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	{% with title = "Edit " + restaurant.name %}
+		{% include "partials/head.html" %}
+	{% endwith %}
+
+	<body>
+		{% with nav_elems = [(restaurant.name, url_for('show_menu', restaurant_id=restaurant.id), None)] %}
+			{% include "partials/navigation.html" %}
+		{% endwith %}
+
+		<div class="container">
+			<h1>Edit Restaurant</h1>
+			<form action="{{ url_for('edit_restaurant', restaurant_id=restaurant.id)}}" method="POST">
+			
+				<div class="form-group">
+					<label class="sr-only" for="newMenuItem-inputName">Name</label>
+					<div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-8">
+						<div class="input-group-addon">Name</div>
+						<input type="text" class="form-control" value='{{restaurant.name }}' name="name" id="newMenuItem-inputName">
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Edit</button>
+				<a class="marginLeft-10px" href="{{url_for('show_menu', restaurant_id=restaurant.id)}}" class="btn btn-default">Cancel</a>
+
+			</form>
+		</div>
+	</body>
+</html>

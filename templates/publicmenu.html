@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	{% with title = restaurant.name + " menu" %}
+		{% include "partials/head.html" %}
+	{% endwith %}
+
+	<body>
+		{% with nav_elems = [(restaurant.name, url_for('show_menu', restaurant_id=restaurant.id), "active")] %}
+			{% include "partials/navigation.html" %}
+		{% endwith %}
+
+		<div class="container">
+			{% include "partials/flash.html" %}
+
+			<h1>{{ restaurant.name }}</h1>
+			<div class="media marginBottom-10px">
+				<div class="media-left">
+					<a href="#">
+						<img class="media-object" src="{{creator.picture}}" alt="{{creator.name}}">
+					</a>
+				</div>
+				<div class="media-body verticalAlign-middle">
+					<h4 class="media-heading">Creator: {{creator.name}}</h4>
+				</div>
+			</div>
+		{% if items == [] %}
+			<p>
+				There are no menu items currently
+			</p>
+		{% else %}
+			<div class="row">
+				{% for i in items %}
+
+					<div class="col-sm-12 col-sm-6 col-md-4 col-lg-3">
+						<div class="thumbnail">
+							<img style="height: 200px; width: 100%; display: block;"
+
+							{% if i.image %}
+								src="/uploads/{{ i.image }}"
+							{% else %}
+								src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MjAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTUzMjI2NjY0NjggdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMnB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNTMyMjY2NjQ2OCI+PHJlY3Qgd2lkdGg9IjI0MiIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI4OS44NTkzNzUiIHk9IjEwNS4xIj4yNDJ4MjAwPC90ZXh0PjwvZz48L2c+PC9zdmc+"
+							{% endif %}
+							>
+							<div class="caption">
+								<h3>{{i.name}}</h3>
+								<p class="text-grayed">{{i.description}}</p>
+								<div class="item-price">
+									<span>{{i.price}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+		</div>
+
+		
+	</body>
+</html>

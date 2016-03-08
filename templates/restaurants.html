@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	{% with title = "Restaurant listing" %}
+		{% include "partials/head.html" %}
+	{% endwith %}
+
+	<body>
+		{% include "partials/navigation.html" %}
+
+		<div class="container">
+			{% include "partials/flash.html" %}
+			<p>
+				<a href="{{url_for('new_restaurant')}}" class="btn btn-sm btn-primary">Create a New Restaurant</a>
+			</p>
+			<div class="list-group">
+				{% for restaurant in restaurants %}
+					<a href="{{url_for('show_menu', restaurant_id = restaurant.id)}}" class="list-group-item ">
+						{{restaurant.name}}
+					</a>
+				{% endfor %}
+			</div>
+			
+		</div>
+	</body>
+
+</html>
