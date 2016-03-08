@@ -1,4 +1,4 @@
-Cheetah==2.4.4
+gunicorn==19.1.1
 Flask==0.10.1
 Flask-HTTPAuth==2.7.1
 Jinja2==2.7.2
@@ -13,7 +13,6 @@ jsonpointer==1.0
 oauth==1.0.1
 oauth2client==1.5.2
 passlib==1.6.5
-prettytable==0.7.2
 psycopg2==2.4.5
 pyOpenSSL==0.13
 requests==2.2.1
