@@ -29,7 +29,7 @@ app.register_blueprint(oauth)
 
 # Instantiate our Data Access Objects
 usr_dao = UserDAO()
-rst_dao = restaurantDAO()
+rst_dao = RestaurantDAO()
 mnu_dao = MenuItemDAO()
 
 
