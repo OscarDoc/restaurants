@@ -37,5 +37,3 @@ def show_restaurants():
 
 app.secret_key = 'super_insecure_key'
 app.debug = False
-if __name__ == '__main__':    
-    app.run(host='0.0.0.0', port=5000)
