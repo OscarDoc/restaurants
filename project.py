@@ -37,7 +37,7 @@ def show_restaurants():
     restaurants = rst_dao.get_all_restaurants()
     return render_template(
         'publicrestaurants.html',
-        restaurants=[])
+        restaurants=restaurants)
 
 
 app.secret_key = 'super_insecure_key'
