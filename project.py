@@ -20,7 +20,6 @@ app.wsgi_app = SharedDataMiddleware(
     app.wsgi_app, {'/uploads': app.config['UPLOAD_FOLDER']})
 
 # Instantiate our Data Access Objects
-rst_dao = RestaurantDAO()
 
 
 
@@ -34,10 +33,9 @@ def show_restaurants():
         new restaurants.
 
     """
-    restaurants = rst_dao.get_all_restaurants()
     return render_template(
         'publicrestaurants.html',
-        restaurants=restaurants)
+        restaurants=list())
 
 
 app.secret_key = 'super_insecure_key'
