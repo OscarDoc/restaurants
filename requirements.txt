@@ -8,7 +8,6 @@ PyYAML==3.10
 SQLAlchemy==0.8.4
 SecretStorage==2.0.0
 Werkzeug==0.9.4
-apt-xapian-index==0.45
 argparse==1.2.1
 astroid==1.0.1
 bleach==1.4.2
