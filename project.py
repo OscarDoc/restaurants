@@ -35,7 +35,7 @@ def show_restaurants():
 
     """
     restaurants = rst_dao.get_all_restaurants()
-    return restaurants
+    return restaurants[0].name
 
 
 app.secret_key = 'super_insecure_key'
