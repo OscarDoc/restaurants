@@ -4,6 +4,7 @@ import string
 from daos import UserDAO, RestaurantDAO, MenuItemDAO
 from flask import (Flask, render_template, request, redirect, url_for, flash,
                    session as login_session, make_response)
+from werkzeug import SharedDataMiddleware, secure_filename
 
 # App constants
 UPLOAD_FOLDER = 'uploads'
@@ -15,6 +16,8 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024  # 1 Megabyte
 app.add_url_rule('/uploads/<filename>', 'uploaded_file', build_only=True)
+app.wsgi_app = SharedDataMiddleware(
+    app.wsgi_app, {'/uploads': app.config['UPLOAD_FOLDER']})
 
 # Instantiate our Data Access Objects
 rst_dao = RestaurantDAO()
