@@ -207,15 +207,20 @@ def show_menu(restaurant_id):
             restaurant=restaurant,
             items=items,
             creator=creator,
-            username=login_session["username"])
-    # Else, show public page
+            username=get_username(login_session))
+        
+    # Else, show public page. 
+    if "username" in login_session:
+        username = login_session["username"]
     else:
-        return render_template(
-            "publicmenu.html",
-            restaurant=restaurant,
-            items=items,
-            creator=creator,
-            username=login_session["username"])
+        username = None
+
+    return render_template(
+        "publicmenu.html",
+        restaurant=restaurant,
+        items=items,
+        creator=creator,
+        username=get_username(login_session))
 
 
 @app.route("/restaurants/<int:restaurant_id>/new/", methods=["GET", "POST"])
