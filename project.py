@@ -15,8 +15,8 @@ ALLOWED_FILES = set(["png", "jpg", "jpeg", "gif"])
 # Initialize app
 app = Flask(__name__)
 app.debug = True   # if True Flash will reload the code on every change
-app.secret_key = "super_insecure_key" # Wouldn't be this in REAL production :)
-app.config["UPLOAD_FOLDER"] = "uploads" # Server folder where uploads end up
+app.secret_key = "super_insecure_key"
+app.config["UPLOAD_FOLDER"] = os.path.join('/tmp') # Not permanent at Heroku!!
 app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024  # = 1 Megabyte
 app.add_url_rule("/uploads/<filename>", "uploaded_file", build_only=True)
 app.wsgi_app = SharedDataMiddleware(
