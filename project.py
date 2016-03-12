@@ -1,11 +1,9 @@
 import os
 import random
 import string
-from daos import UserDAO, RestaurantDAO, MenuItemDAO
 from flask import (Flask, render_template, request, redirect, url_for, flash,
                    session as login_session, make_response)
 from werkzeug import SharedDataMiddleware, secure_filename
-
 # App constants
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_FILES = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -19,10 +17,7 @@ app.add_url_rule('/uploads/<filename>', 'uploaded_file', build_only=True)
 app.wsgi_app = SharedDataMiddleware(
     app.wsgi_app, {'/uploads': app.config['UPLOAD_FOLDER']})
 
-# Instantiate our Data Access Objects
-rst_dao = RestaurantDAO()
-
-
+# Register blueprints from project_api_endpoint.py and project_oauth.py
 
 @app.route('/')
 @app.route('/restaurants')
@@ -34,10 +29,7 @@ def show_restaurants():
         new restaurants.
 
     """
-    restaurants = rst_dao.get_all_restaurants()
-    return render_template(
-        'publicrestaurants.html',
-        restaurants=restaurants)
+    return "aaa"
 
 
 app.secret_key = 'super_insecure_key'
