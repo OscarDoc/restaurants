@@ -228,6 +228,39 @@ def disconnect():
         return redirect(url_for('show_restaurants'))
 
 
+
+# Disconnect based on provider
+@oauth.route('/disconnect')
+def disconnect():
+    """Disconnects the user, removing its session and calling any
+    vendor-specific code to revoke the access token.
+
+    Returns:
+        A redirect to main page.
+
+    """
+    if 'provider' in login_session:
+        # First revoke the provider's access token
+        if login_session['provider'] == 'google':
+            gdisconnect()
+            del login_session['gplus_id']
+            del login_session['credentials']
+        if login_session['provider'] == 'facebook':
+            fbdisconnect()
+            del login_session['facebook_id']
+        # Then delete the user's session
+        del login_session['username']
+        del login_session['email']
+        del login_session['picture']
+        del login_session['user_id']
+        del login_session['provider']
+        flash("You have successfully been logged out.")
+        return redirect(url_for('show_restaurants'))
+    else:
+        flash("You were not logged in")
+        return redirect(url_for('show_restaurants'))
+
+
 # Disconnect Facebook, revoking user's token and ressetting its session
 @oauth.route('/fbdisconnect')
 def fbdisconnect():
@@ -242,7 +275,7 @@ def fbdisconnect():
     result = h.request(url, 'DELETE')[1]
     if result['status'] != '200':
         flash("Failed to revoke user's token", "error")
-        return False
+        return json_response("Failed to revoke user's token", 400)
 
 
 # Disconnect Google, revoking user's token and ressetting its session
@@ -253,7 +286,7 @@ def gdisconnect():
     credentials = login_session.get('credentials')
     if credentials is None:
         flash("Current user not connected", "error")
-        return False
+        return json_response("Current user not connected", 401)
 
     credentials = OAuth2Credentials.from_json(credentials)
     # Execute HTTP GET to revoke current token
@@ -264,8 +297,4 @@ def gdisconnect():
     result = h.request(url, 'GET')[0]
     if result['status'] != '200':
         flash("Failed to revoke user's token", "error")
-        flash(access_token, "error")
-        flash(credentials.to_json(), "error")
-        flash(result, "error")
-        flash(result.to_json(), "error")
-        return False
+        return json_response("Failed to revoke user's token", 400)
