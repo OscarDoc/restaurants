@@ -207,10 +207,10 @@ def show_menu(restaurant_id):
             restaurant=restaurant,
             items=items,
             creator=creator,
-            username=get_username(login_session))
-        
+            username=login_session["username"])
+
     # Else, show public page. 
-    if "username" in login_session:
+    if is_logged():
         username = login_session["username"]
     else:
         username = None
@@ -220,7 +220,7 @@ def show_menu(restaurant_id):
         restaurant=restaurant,
         items=items,
         creator=creator,
-        username=get_username(login_session))
+        username=username)
 
 
 @app.route("/restaurants/<int:restaurant_id>/new/", methods=["GET", "POST"])
