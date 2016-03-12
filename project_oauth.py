@@ -264,4 +264,8 @@ def gdisconnect():
     result = h.request(url, 'GET')[0]
     if result['status'] != '200':
         flash("Failed to revoke user's token", "error")
+        flash(access_token, "error")
+        flash(credentials.to_json(), "error")
+        flash(result, "error")
+        flash(result.to_json(), "error")
         return False
