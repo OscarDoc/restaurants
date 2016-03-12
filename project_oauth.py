@@ -5,7 +5,7 @@ import httplib2
 import json
 import requests
 from daos import UserDAO
-from flask import (abort, Blueprint, flash, redirect, request,
+from flask import (abort, Blueprint, flash, make_response, redirect, request,
                    session as login_session, url_for)
 from oauth2client.client import (flow_from_clientsecrets, FlowExchangeError,
                                  OAuth2Credentials)
@@ -238,9 +238,6 @@ def fbdisconnect():
     # Call and check everything went fine
     h = httplib2.Http()
     result = h.request(url, 'DELETE')[1]
-    if result['status'] != '200':
-        flash("Failed to revoke user's token", "error")
-        return json_response("Failed to revoke user's token", 400)
 
 
 # Disconnect Google, revoking user's token and ressetting its session
