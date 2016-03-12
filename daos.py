@@ -115,7 +115,7 @@ class RestaurantDAO(GenericDAO):
         Returns:
             A list with all the restaurants, in no particular order.
         """
-        return [] # self.session.query(Restaurant).all()
+        return self.session.query(Restaurant).all()
 
     def set_restaurant_name(self, rest_id, new_name):
         """Updates a restaurant's name.
