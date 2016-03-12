@@ -9,7 +9,9 @@ from project_api_endpoints import api_json, api_atom
 from project_oauth import oauth
 
 # App constants
-UPLOAD_FOLDER = 'uploads'
+
+# Should be moved to an Amazon S3 bucket because Heroku 'disk' is cleaned
+UPLOAD_FOLDER = os.path.join('/tmp')
 ALLOWED_FILES = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
