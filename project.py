@@ -4,6 +4,7 @@ import string
 from daos import UserDAO, RestaurantDAO, MenuItemDAO
 from flask import (Flask, render_template, request, redirect, url_for, flash,
                    session as login_session, make_response)
+from flask.ext.seasurf import SeaSurf
 from werkzeug import SharedDataMiddleware, secure_filename
 from project_api_endpoints import api_json, api_atom
 from project_oauth import oauth
@@ -14,11 +15,13 @@ ALLOWED_FILES = set(["png", "jpg", "jpeg", "gif"])
 
 # Initialize app
 app = Flask(__name__)
+csrf = SeaSurf(app) # Extension to prevent cross-site request forgery (CSRF)
 app.debug = True   # if True Flash will reload the code on every change
 app.secret_key = "super_insecure_key"
-app.config["UPLOAD_FOLDER"] = os.path.join('/tmp') # Not permanent at Heroku!!
-app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024  # = 1 Megabyte
+app.config["UPLOAD_FOLDER"] = os.path.join('/tmp')  # Not permanent at Heroku!!
+app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024   # = 1 Megabyte
 app.add_url_rule("/uploads/<filename>", "uploaded_file", build_only=True)
+# This lets us use the route /uploads although it does not phisically exist
 app.wsgi_app = SharedDataMiddleware(
     app.wsgi_app, {"/uploads": app.config["UPLOAD_FOLDER"]})
 
@@ -32,17 +35,23 @@ usr_dao = UserDAO()
 rst_dao = RestaurantDAO()
 mnu_dao = MenuItemDAO()
 
+
 # Helper functions
 
 def is_logged():
+    """Returns True if and only if the user is logged."""
     return "username" in login_session
 
 
 def is_owners_session(obj):
+    """Returns True if and only if the user in session is the owner of obj. The
+    owner of an object is the User pointed by the DB relaation."""
     return is_logged() and obj.user_id == login_session["user_id"]
 
 
 def allowed_file(filename):
+    """Returns True if and only if the file has one of the extensions
+    allowed."""
     return "." in filename and \
         filename.rsplit(".", 1)[1] in ALLOWED_FILES
 
@@ -209,7 +218,7 @@ def show_menu(restaurant_id):
             creator=creator,
             username=login_session["username"])
 
-    # Else, show public page. 
+    # Else, show public page
     if is_logged():
         username = login_session["username"]
     else:
