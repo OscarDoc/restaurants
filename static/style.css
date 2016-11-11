@@ -1,4 +1,22 @@
-body{ background-color: #F7F7F7; }
+body {
+	background-color: #F7F7F7;
+	display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container {
+	flex-grow: 1;
+}
+footer.navbar {
+	min-height: 14px;
+}
+footer.navbar p {
+	color: #AAA;
+}
+footer.navbar a,
+footer.navbar a:hover {
+	color: #9bc6ea;
+}
 
 .text-grayed{ color: #999; }
 .marginBottom-0{ margin-bottom: 0; }
@@ -7,7 +25,9 @@ body{ background-color: #F7F7F7; }
 .marginLeft-10px{ margin-left: 10px; }
 .verticalAlign-middle{vertical-align: middle;}
 
-.navbar{border-radius: 0;}
+.navbar{
+	border-radius: 0;
+}
 
 a.list-group-item:hover{
     background-color: #AFA;

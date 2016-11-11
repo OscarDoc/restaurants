@@ -28,14 +28,14 @@
 				</span>
 			</div>
 			<div id="result"></div>
-		</div>
+
 		<script>
 			var signInOutput = reason => $('#result').html(reason);
 
 			var signInCallback = authResult => {
-				if(!authResult['code']) return;				
+				if(!authResult['code']) return;
 
-				$('#signinButton').attr('style', 'display: none');				
+				$('#signinButton').attr('style', 'display: none');
 				$('#fb-signinButton').attr('style', 'display: none');
 				signInOutput('Authenticating, please wait...');
 
@@ -73,7 +73,7 @@
 			window.fbAsyncInit = function() {
 			FB.init({
 				appId      : '106945379700343',
-				cookie     : true,  // enable cookies to allow the server to access 
+				cookie     : true,  // enable cookies to allow the server to access
 									// the session
 				xfbml      : true,  // parse social plugins on this page
 				version    : 'v2.5' // use version 2.2
@@ -125,7 +125,7 @@
 			}
 		</script>
 
-		<div class="container">
+
 			<div id="fb-signinButton">
 				<fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
 					<a href='javascript:sendTokenToServer()'>Login with Facebook</a>
@@ -133,6 +133,7 @@
 			</div>
 		</div>
 		<!--END FACEBOOK SIGN IN -->
+		{% include "partials/footer.html" %}
 
 	</body>
 

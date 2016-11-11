@@ -12,9 +12,9 @@
 		<div class="container">
 			<h1>Edit Menu Item</h1>
 			<form action="{{ url_for('edit_menu_item', restaurant_id = restaurant.id, menu_id = item.id)}}" method="POST" enctype="multipart/form-data">
-    			
+
     			<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-			
+
 				<div class="form-group">
 					<div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-8">
 						<div class="input-group-addon">Name</div>
@@ -22,23 +22,23 @@
 							{%if item.name != None%} value="{{item.name}}" {% endif %}>
 					</div>
 				</div>
-			
+
 				<div class="form-group">
 					<div class="input-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
 						<div class="input-group-addon">Description</div>
 						<input required type="text" class="form-control" name="description" placeholder="Tasty dish accompanied by tasty tasties, all bathed in our secret tasty sauce."
-							{%if item.description != None%} value="{{item.description}}" {% endif %}>							
+							{%if item.description != None%} value="{{item.description}}" {% endif %}>
 					</div>
 				</div>
-			
+
 				<div class="form-group">
 					<div class="input-group col-lg-2 col-md-2 col-sm-3 col-xs-4">
 						<div class="input-group-addon">Price</div>
 						<input required type="text" class="form-control" name="price" placeholder="$X.XX"
 							{%if item.price != None%} value="{{item.price}}" {% endif %}>
 					</div>
-				</div>			
-				
+				</div>
+
 				<div class="form-group">
 					<div class="input-group col-lg-3 col-md-3 col-sm-4 col-xs-6">
 						<div class="input-group-addon">Course</div>
@@ -65,6 +65,6 @@
 
 			</form>
 		</div>
-
+		{% include "partials/footer.html" %}
 	</body>
 </html>

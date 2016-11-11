@@ -12,19 +12,20 @@
 		<div class="container">
 			<h1>Delete restaurant: {{restaurant.name}}?</h1>
 			<form action="{{ url_for('delete_restaurant', restaurant_id=restaurant.id)}}" method="POST">
-    			
+
     			<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-				
+
 				<div class="form-group">
 					<label>Are you sure? This action can't be undone</label>
 				</div>
-				
+
 				<div class="form-group">
 					<button type="submit" class="btn btn-danger">Delete</button>
 					<a class="marginLeft-10px" href="{{url_for('show_menu', restaurant_id=restaurant.id)}}">Cancel</a>
 				</div>
-				
+
 			</form>
 		</div>
-
+		{% include "partials/footer.html" %}
+	</body>
 </html>

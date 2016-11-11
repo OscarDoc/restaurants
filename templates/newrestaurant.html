@@ -10,9 +10,9 @@
 		<div class="container">
 			<h1>New Restaurant</h1>
 			<form class="" action="{{ url_for('new_restaurant')}}" method="POST">
-    			
+
     			<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-				
+
 				<div class="form-group">
 					<label class="sr-only" for="newRestaurant-inputName">Name</label>
 					<div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-8">
@@ -26,6 +26,7 @@
 
 			</form>
 		</div>
+		{% include "partials/footer.html" %}
 
 	</body>
 </html>
