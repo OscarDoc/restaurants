@@ -7,6 +7,10 @@ This project implements a web application that lets restaurant owners show their
   * Database: **SQLAlchemy** backed by a **PostgreSQL** database. Also tested with **SQLite** during development.
   * Front-end: **HTML5/CSS3**, with a **Bootstrap** interface and some **jQuery**.
 
+## Project page
+
+The official page is [found here](http://www.oscardc.com/pages/restaurant-menu).
+
 ## Live site
 
 https://oscardoc-restaurant-menu.herokuapp.com, hosted at [Heroku](https://www.heroku.com)
