@@ -13,7 +13,7 @@ https://oscardoc-restaurant-menu.herokuapp.com, hosted at [Heroku](https://www.h
 
 ## Screenshot
 
-![screenshot](/vagrant/restaurants/screenshot.jpg?raw=true "Project as of 29 February 2016")
+![screenshot](/screenshot.jpg?raw=true "Project as of 29 February 2016")
 
 
 # How to run the project
