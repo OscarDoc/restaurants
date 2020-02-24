@@ -5,7 +5,7 @@ Flask-SeaSurf==0.2.1
 Jinja2==2.7.2
 Markdown==2.6.5
 MarkupSafe==0.18
-PyYAML==3.10
+PyYAML==5.1
 SQLAlchemy==0.8.4
 SecretStorage==2.0.0
 Werkzeug==0.9.6
